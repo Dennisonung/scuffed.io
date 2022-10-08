@@ -1,0 +1,8 @@
+Info for Getting Quizzes
+
+GetQuizType:
+    Local, Gets the quiz from local storage. (Default)
+    R2, Gets the quiz from the CloudFlare R2 storage.
+        Please store the R2 database info in .env
+
+I will update this list when I add more support for databases..? (Maybe)

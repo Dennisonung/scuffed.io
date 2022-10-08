@@ -1,0 +1,12 @@
+{
+    "MaxQuestionsPerQuiz": 50,
+    "PointsPerCorrectAnswer": 800,
+    "GetPointsIfWrongAnswer": {
+        "Enabled": false,
+        "Points": 0
+    },
+    "MaxUsersPerLobby": 10,
+    "GetQuizLocal": true,
+    "UseHttps": false,
+    "LocalStoragePath": "./data/"
+}

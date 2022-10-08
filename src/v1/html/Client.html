@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/res/css/Bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/style.css">
+    <link rel="stylesheet" href="/res/css/animate.css">
+    <link rel="stylesheet" href="/res/css/index.css">
+    <link rel="stylesheet" href="/res/css/header.css">
+    <link rel="stylesheet" href="/res/css/navbar.css">
+    <link rel="stylesheet" href="/res/css/DDCFrameWork/Header.css">
+    <link rel="stylesheet" href="/res/css/DDCFrameWork/Footer.css">
+    <link rel="stylesheet" href="/res/css/DDCFrameWork/Extras.css">
+    <link rel="stylesheet" href="/res/css/ScuffedFrame.css">
+    <link rel="stylesheet" href="/res/css/scuffed.io/Client.css">
+    <script src="/res/socket.io/socket.io.js"></script>
+    <title>scuffed.io</title>
+</head>
+
+<body onload="loader()">
+    <div class="loader center animated fadeInUp" id="loader"></div>
+
+    <div class="main animated fadeInUp" id="main"style="display:none">
+        <h1>scuffed.io</h1>
+        <div class="swhite roundedBox center joinLobbyBox" style="margin-top:auto;">
+            <input placeholder="Lobby PIN"autocomplete="off"style="width:250px" class="center"type="text" id="LobbyCode">
+            <div style="padding-top:20px">
+                <a class="btn rblack">Join Lobby</a>
+            </div>
+        </div>
+    </div>
+    <footer style="position:fixed;text-align:center;bottom:0px;width:100%;">
+        <h6><a href="/">Create your own quiz! || scuffed.io</a></h6>
+        <div>
+            <img fill="black" style="width:9em;" alt="ddc" src="https://info.ddc.gg/RecLogo.png"></img>
+            
+            <h5>Dennisonung Foundation &copy; scuffed.io </h5>
+            <h6><a href="https://ddc-dev.com/policies.php">Privacy Poilcy</a></h6>
+        </div>
+    </footer>
+    <script src="/res/js/client.js"></script>
+    <script>
+        var socket = io("http://localhost:8080");
+        function loader() {
+          a = setTimeout(showPage, 500);
+        }
+        
+        function showPage() {
+            document.getElementById("loader").classList.remove("fadeinUp");
+            document.getElementById("loader").classList.add("fadeOutDown");
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("main").style.display = "block";
+        }
+        </script>
+</body>
+
+</html>
