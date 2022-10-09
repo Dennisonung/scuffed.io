@@ -2,6 +2,7 @@ module.exports = {
     name: 'Name',
     run: function () {
         const fs = require('fs')
+        const util = require('util')
         const logFilePath = "latest.log";
         fs.writeFileSync(logFilePath, "");
         function createLogFunction(original) {

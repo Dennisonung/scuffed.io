@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/res/css/ScuffedFrame.css">
     <link rel="stylesheet" href="/res/css/scuffed.io/Client.css">
     <script src="/res/socket.io/socket.io.js"></script>
+    <script src="/res/js/jquery.min.js"></script>
     <title>scuffed.io</title>
 </head>
 
@@ -27,12 +28,13 @@
     <div class="main animated fadeInUp" id="main"style="display:none">
         <h1>scuffed.io</h1>
         <div class="swhite roundedBox center joinLobbyBox" style="margin-top:auto;">
-            <input placeholder="Lobby PIN"autocomplete="off"style="width:250px" class="center"type="text" id="LobbyCode">
+            <input id="LobbyPin"placeholder="Lobby PIN"autocomplete="off"style="width:250px" class="center"type="text" id="LobbyCode">
             <div style="padding-top:20px">
-                <a class="btn rblack">Join Lobby</a>
+                <a onclick="LobbyJoin()" class="btn rblack">Join Lobby</a>
             </div>
         </div>
     </div>
+    <div class="errorBox animated-fast slideInUp"><h3>Error Code</h3><h5>Error Message Here</h5></div>
     <footer style="position:fixed;text-align:center;bottom:0px;width:100%;">
         <h6><a href="/">Create your own quiz! || scuffed.io</a></h6>
         <div>
@@ -44,16 +46,42 @@
     </footer>
     <script src="/res/js/client.js"></script>
     <script>
-        var socket = io("http://localhost:8080");
+        const d = document;
+        const timer = ms => new Promise(res => setTimeout(res, ms));
+        const socket = io("http://localhost:8080");
+        async function error(ErrNum,ErrMsg) {
+            d.querySelector(".errorBox h3").innerHTML = `${ErrMsg}`;
+            d.querySelector(".errorBox h5").innerHTML = `Error Code: ${ErrNum}`;
+            const errorBox = d.getElementsByClassName("errorBox")[0];
+            errorBox.style.display = "inline-block";      
+            await timer(5000);
+            errorBox.classList.remove("slideInUp");
+            errorBox.classList.add("slideOutDown");
+            await timer(500);
+            errorBox.style.display = "none";
+            errorBox.classList.remove("slideOutDown");
+            errorBox.classList.add("slideInUp");
+        }
         function loader() {
           a = setTimeout(showPage, 500);
         }
-        
         function showPage() {
             document.getElementById("loader").classList.remove("fadeinUp");
             document.getElementById("loader").classList.add("fadeOutDown");
             document.getElementById("loader").style.display = "none";
             document.getElementById("main").style.display = "block";
+        }
+
+        function LobbyJoin() {
+            const LobbyPin = d.getElementById('LobbyPin').value
+            if (LobbyPin.length===0) return;
+            $.post("/V1/JoinLobby",{LobbyPin: LobbyPin}, function(data) {
+                
+            })
+            .fail(function() {
+                error("404", "Lobby Not Found");
+            })
+            
         }
         </script>
 </body>

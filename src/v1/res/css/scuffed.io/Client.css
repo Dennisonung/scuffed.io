@@ -24,3 +24,20 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
     }
+
+.errorBox {
+    width:100%;
+    height:5rem;
+    background-color: #ff3131;
+    color: rgb(235, 235, 235);
+    text-align:center;
+    align-items: center;
+    justify-content: center;
+    display:none;
+    font-size: 1.1rem;
+    vertical-align: bottom;
+    position:fixed;
+    bottom:0%;
+    z-index: 100;
+
+}
