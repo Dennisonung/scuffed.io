@@ -22,7 +22,7 @@
     <title>scuffed.io</title>
 </head>
 
-<body onload="loader()">
+<body class="main1"onload="loader()">
     <div class="loader center animated fadeInUp" id="loader"></div>
 
     <div class="main animated fadeInUp" id="main"style="display:none">
@@ -34,6 +34,33 @@
             </div>
         </div>
     </div>
+
+    <div class="main animated fadeInUp" style="display:none"id="main2">
+        <h1>scuffed.io</h1>
+        <h2>Please enter a Username</h2>
+        <div class="swhite roundedBox center joinLobbyBox" style="margin-top:auto;">
+            <input id="LobbyPin"placeholder="Username"autocomplete="off"style="width:250px" class="center"type="text" id="LobbyCode">
+            <div style="padding-top:20px">
+                <a onclick="LobbyJoin()" class="btn rblack">Join Lobby</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="waiting">
+        
+
+    </div>
+
+    <div id="getReady">
+
+    </div>
+
+    <div id="quiz">
+
+    </div>
+
+
+
     <div class="errorBox animated-fast slideInUp"><h3>Error Code</h3><h5>Error Message Here</h5></div>
     <footer style="position:fixed;text-align:center;bottom:0px;width:100%;">
         <h6><a href="/">Create your own quiz! || scuffed.io</a></h6>
@@ -66,21 +93,26 @@
           a = setTimeout(showPage, 500);
         }
         function showPage() {
-            document.getElementById("loader").classList.remove("fadeinUp");
-            document.getElementById("loader").classList.add("fadeOutDown");
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("main").style.display = "block";
+            d.getElementById("loader").classList.remove("fadeinUp");
+            d.getElementById("loader").classList.add("fadeOutDown");
+            d.getElementById("loader").style.display = "none";
+            d.getElementById("main").style.display = "block";
         }
-
+        function returnToMain() {
+            d.getElementById("main2").style.display = "none";
+            d.getElementById("main").style.display = "inital";
+        }
         function LobbyJoin() {
             const LobbyPin = d.getElementById('LobbyPin').value
             if (LobbyPin.length===0) return;
             $.post("/V1/JoinLobby",{LobbyPin: LobbyPin}, function(data) {
-                
-            })
-            .fail(function() {
-                error("404", "Lobby Not Found");
-            })
+                if (data.ErrCode===201) return error(data.ErrCode, data.ErrMsg);   
+                d.getElementById("main").classList.add("fadeOutDown"); 
+                d.getElementById("main").style.display = "none";
+                d.getElementById("main2").style.display = "block";
+            }).fail(function() {
+                error(500, "Internal Server Error");
+            });
             
         }
         </script>

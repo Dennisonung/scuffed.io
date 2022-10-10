@@ -1,5 +1,6 @@
 module.exports = {
-    name: 'Name',
+    name: 'Logging',
+    description: 'Logging Module.',
     run: function () {
         const fs = require('fs')
         const util = require('util')

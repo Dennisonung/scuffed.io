@@ -12,12 +12,13 @@
     border-top: 16px solid #ff4141;
     border-radius: 50%;
     position:fixed;
-    bottom:47%;
-    left:50%;
-    right:50%;
+    bottom:45%;
+    left:0%;
+    right:0%;
     width:120px;
     height:120px;
     animation: spin 2s linear infinite;
+    z-index:999;
 }
 
 @keyframes spin {
@@ -38,6 +39,10 @@
     vertical-align: bottom;
     position:fixed;
     bottom:0%;
-    z-index: 100;
+    z-index: 50;
 
+}
+
+.main1 {
+    background-image: linear-gradient(to bottom right, #ffa200, rgb(255, 0, 234));
 }

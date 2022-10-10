@@ -1,6 +1,7 @@
 module.exports = {
     name: 'WebUI',
     description: 'WebUI Module. For Quiz hosters and general users.',
+    ErrorCodeRange: 100,
     run: function (app, path, R2, io, fs, transporter, sha512) {
         app.get('/favicon.ico', (req,res) => {
             res.sendFile(path.join(__dirname, '../res/favicon.ico'))
