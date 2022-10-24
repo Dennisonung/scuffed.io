@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 global.Config = JSON.parse(fs.readFileSync(__dirname + '/config/config.json'));
-
+global.forbidden = ["null","forbidden","fs"]
 const useHttps = Config.useHttps;
 const R2 = new S3({
 	endpoint: env.R2ENDPOINT,
@@ -51,6 +51,7 @@ for (const i in cores) {
 }
 app.use('/res', express.static('./src/v1/res'));
 app.all('/v1/*', (req, res) => res.status(404).send('404 Not Found'));
+app.use('favicon.ico', (req,res) => res.sendFile(__dirname + '/v1/html/favicon.ico'));
 app.all('/*', (req, res) => res.status(404).sendFile(__dirname + '/v1/html/404.html'));
 
 
